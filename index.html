@@ -67,7 +67,7 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block;height:aut
 .progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--teal),var(--gold));z-index:120}
 .header{position:sticky;top:0;z-index:100;background:rgba(246,244,239,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:transform .35s var(--ease),border-color .3s,box-shadow .3s}
 .header.scrolled{border-color:var(--line);box-shadow:0 8px 24px rgba(14,34,56,.06)}
-.header.hide{transform:translateY(-100%)}
+/* 스크롤 중에도 헤더를 보이게 유지합니다. */
 .hrow{height:76px;display:flex;align-items:center;gap:22px;width:min(1280px,calc(100% - 64px));margin:auto}
 .logo img{height:46px;width:auto}
 .hright{margin-left:auto;display:flex;align-items:center;gap:26px}
@@ -260,6 +260,37 @@ html:not(.js) .tl::after{transform:none}
 .chbtn svg{width:30px;height:30px}
 .chbtn .ar{color:var(--muted);font-weight:400}
 
+/* ===== Beyond CSO ===== */
+.beyond{background:#f0ebe2;border-top:1px solid #e4dbcd;border-bottom:1px solid #e4dbcd;overflow:hidden}
+.beyond::before{content:"";position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent 10%,rgba(139,107,71,.28) 50%,transparent 90%)}
+.beyond-grid{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(0,.78fr);gap:clamp(48px,7vw,112px);align-items:start}
+.beyond .eyebrow{color:#886a48}
+.beyond h2{font-family:var(--serif);font-size:clamp(1.85rem,3vw,2.65rem);line-height:1.55;font-weight:600;letter-spacing:-.05em;color:var(--navy);margin:14px 0 26px}
+.beyond-lead{font-size:1.14rem;font-weight:700;color:#263443;margin:0 0 16px}
+.beyond-copy{font-size:1.04rem;color:#4c5155;max-width:37em;margin:0}
+.beyond-copy + .beyond-copy{margin-top:12px}
+.beyond-quote{max-width:38em;margin:34px 0 0;border-left:2px solid #a88a62;padding:2px 0 2px 22px;font-family:var(--serif);font-size:1.1rem;line-height:1.85;font-weight:600;color:#685139}
+.beyond-aside{border-top:1px solid #b7a98e;padding-top:12px;margin-top:42px}
+.beyond-aside-title{margin:0 0 4px;color:#8a7353;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800}
+.beyond-item{padding:23px 0 24px;border-bottom:1px solid #d5cbbc}
+.beyond-item h3{font-size:1.06rem;letter-spacing:-.025em;margin:0 0 6px;color:var(--navy);font-weight:750}
+.beyond-item p{font-size:.94rem;line-height:1.75;margin:0;color:#5e605d}
+.beyond-item .n{display:inline-block;min-width:30px;font-family:var(--serif);font-size:.84rem;color:#a18462;font-weight:600;vertical-align:1px}
+@media(max-width:1080px){
+ .beyond-grid{grid-template-columns:1fr;gap:36px}
+ .beyond-aside{margin-top:0;display:grid;grid-template-columns:1fr 1fr;column-gap:24px}
+ .beyond-aside-title{grid-column:1/-1}
+ .beyond .eyebrow::before{display:none}
+}
+@media(max-width:600px){
+ .beyond h2{font-size:clamp(1.75rem,7.2vw,2.15rem);line-height:1.47}
+ .beyond-lead{font-size:1.03rem}
+ .beyond-copy{font-size:.96rem}
+ .beyond-quote{font-size:1rem;margin-top:26px;padding-left:16px}
+ .beyond-aside{display:block}
+ .beyond-item{padding:18px 0}
+}
+
 /* contact */
 .contact{background:var(--paper2)}
 .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
@@ -427,6 +458,46 @@ html:not(.js) .tl::after{transform:none}
  .js .mol .ln{stroke-dashoffset:0!important}.js .mol .ln.f{stroke-dasharray:3 5!important}
  .tl::after{transform:none!important}
 }
+
+
+/* ===== v4: always-visible wayfinding for the one-page site ===== */
+html{scroll-padding-top:94px}
+.header{transform:none!important;box-shadow:0 4px 20px rgba(14,34,56,.035)}
+.header.scrolled{box-shadow:0 7px 22px rgba(14,34,56,.075)}
+.hrow{gap:18px}
+.hright{gap:18px}
+.nav{gap:clamp(10px,1.25vw,20px)}
+.nav a{font-size:clamp(.81rem,.94vw,.92rem);white-space:nowrap}
+.hcta{white-space:nowrap}
+.chapter-nav{display:none}
+.mnav a.on{color:var(--teal2)}
+.beyond-aside-title{letter-spacing:.11em}
+.beyond-item h3{line-height:1.55}
+.footer-social{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:25px}
+.footer-social-title{font-weight:700;color:#d4d8dc;margin-right:4px}
+.footer-social-link{display:inline-flex;align-items:center;gap:9px;padding:7px 12px 7px 7px;border:1px solid rgba(255,255,255,.20);border-radius:999px;color:#e8e7e3;transition:border-color .2s,background .2s,transform .2s;font-size:.86rem;font-weight:600}
+.footer-social-link svg{width:27px;height:27px;flex-shrink:0}
+.footer-social-link:hover{border-color:rgba(255,255,255,.50);background:rgba(255,255,255,.075);transform:translateY(-2px)}
+@media(max-width:1080px){
+ html{scroll-padding-top:130px}
+ .chapter-nav{display:flex;align-items:center;gap:5px;overflow-x:auto;overflow-y:hidden;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-top:1px solid var(--line);padding:6px 20px 8px;background:rgba(246,244,239,.97);min-height:43px;position:relative}
+ .chapter-nav::-webkit-scrollbar{display:none}
+ .chapter-nav a{position:relative;display:block;flex:none;padding:5px 11px 6px;border-radius:999px;font-size:.82rem;font-weight:650;color:#65645f;line-height:1.6;transition:background .2s,color .2s}
+ .chapter-nav a.on{background:#e4dbcc;color:#3d2b1d}
+ .chapter-nav a:focus-visible{outline-offset:-2px}
+ .mnav a{display:block}
+ .mnav a.on{color:#7b5636}
+ .footer-social{justify-content:center}
+}
+@media(max-width:600px){
+ .chapter-nav{padding-left:12px;padding-right:12px}
+ .footer-social-title{width:100%;text-align:center;margin-right:0}
+ .footer-social-link{padding:7px 11px 7px 7px}
+}
+@media(prefers-reduced-motion:reduce){
+ .footer-social-link,.chapter-nav a{transition:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -441,13 +512,14 @@ html:not(.js) .tl::after{transform:none}
     <a class="sico" href="https://www.instagram.com/firstyoupharm/" target="_blank" rel="noopener" aria-label="퍼스트유팜 인스타그램 (새 창)" title="인스타그램"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0" stop-color="#fdf497"/><stop offset=".05" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285AEB"/></radialGradient></defs><rect width="32" height="32" rx="8" fill="url(#ig)"/><rect x="8" y="8" width="16" height="16" rx="4.6" fill="none" stroke="#fff" stroke-width="2"/><circle cx="16" cy="16" r="3.8" fill="none" stroke="#fff" stroke-width="2"/><circle cx="20.6" cy="11.4" r="1.15" fill="#fff"/></svg></a>
    </div>
    <nav class="nav" aria-label="주요 메뉴">
-    <a href="#about" data-n="about">회사소개</a><a href="#work" data-n="work">일하는 방식</a><a href="#promise" data-n="promise">우리의 약속</a><a href="#message" data-n="message">대표 인사</a><a href="#together" data-n="together">함께</a>
+    <a href="#about" data-n="about">회사소개</a><a href="#work" data-n="work">CSO 소개</a><a href="#promise" data-n="promise">신뢰 원칙</a><a href="#message" data-n="message">대표 인사</a><a href="#together" data-n="together">현장과 함께</a><a href="#beyond" data-n="beyond">한 걸음 더</a>
    </nav>
    <a class="hcta" href="#contact">문의하기</a>
    <button class="mtoggle" id="mt" aria-expanded="false" aria-controls="mn" aria-label="메뉴 열기"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg></button>
   </div>
  </div>
- <nav class="mnav" id="mn" aria-label="모바일 메뉴"><a href="#about">회사소개</a><a href="#work">일하는 방식</a><a href="#promise">우리의 약속</a><a href="#message">대표 인사</a><a href="#together">함께</a><a href="#contact">문의하기</a></nav>
+ <nav class="chapter-nav" id="chapter-nav" aria-label="섹션 바로가기"><a href="#about" data-n="about">회사소개</a><a href="#work" data-n="work">CSO 소개</a><a href="#promise" data-n="promise">신뢰 원칙</a><a href="#message" data-n="message">대표 인사</a><a href="#together" data-n="together">현장과 함께</a><a href="#beyond" data-n="beyond">한 걸음 더</a><a href="#contact" data-n="contact">문의</a></nav>
+ <nav class="mnav" id="mn" aria-label="모바일 전체 메뉴"><a href="#about" data-n="about">회사소개</a><a href="#work" data-n="work">CSO 소개</a><a href="#promise" data-n="promise">신뢰 원칙</a><a href="#message" data-n="message">대표 인사</a><a href="#together" data-n="together">현장과 함께</a><a href="#beyond" data-n="beyond">한 걸음 더</a><a href="#contact" data-n="contact">문의</a></nav>
 </header>
 
 <main id="main">
@@ -647,6 +719,30 @@ html:not(.js) .tl::after{transform:none}
  </div>
 </section>
 
+<section class="sec beyond" id="beyond" aria-labelledby="t-beyond">
+  <div class="shell beyond-grid">
+    <div class="rv l">
+      <span class="eyebrow">06 · Beyond CSO</span>
+      <h2 id="t-beyond">의료 현장을 이해하는 것에서,<br>한 걸음 더.</h2>
+      <p class="beyond-lead">퍼스트유팜의 중심에는 언제나 의료진과의 신뢰가 있습니다.</p>
+      <p class="beyond-copy">정확한 의약품 정보를 전하는 일에서 출발해, 원장님이 마주하는 다양한 고민에도 귀를 기울여 왔습니다.</p>
+      <p class="beyond-copy">의료정보 블로그를 직접 기획·운영하고, 지금 보고 계신 이 홈페이지도 직접 기획하고 만들었습니다. 정보가 환자에게 닿는 과정을 몸소 겪으며, 의료기관과 환자가 만나는 길을 더 깊이 이해하게 되었습니다.</p>
+      <blockquote class="beyond-quote">좋은 파트너는 자신의 일만 잘하는 사람이 아니라, 상대방의 일까지 이해하려는 사람이라고 믿습니다.</blockquote>
+    </div>
+    <div class="beyond-aside rv r" style="--d:.12s" aria-label="의료 현장을 더 넓게 이해하기 위한 퍼스트유팜의 경험">
+      <p class="beyond-aside-title">Our perspective</p>
+      <div class="beyond-item">
+        <h3><span class="n">01.</span> 의료정보의 전달까지 생각합니다</h3>
+        <p>퍼스트유팜 블로그 [메디컬정보]를 직접 기획·운영하며, 의료정보가 정확하고 이해하기 쉽게 전해지는 글의 흐름과 표현을 연구합니다.</p>
+      </div>
+      <div class="beyond-item">
+        <h3><span class="n">02.</span> 병원을 찾는 첫걸음까지 생각합니다</h3>
+        <p>진료 안내와 오시는 길처럼 환자가 가장 먼저 찾는 정보는 무엇인지, 홈페이지를 직접 기획하고 만들며 익힌 환자의 눈높이로 바라봅니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="sec contact" id="contact" aria-labelledby="t-ct">
  <div class="shell cgrid">
   <div class="rv l"><span class="eyebrow">Contact</span><h2 id="t-ct">필요하실 때,<br>언제든 연락 주세요</h2><p>제품 문의, 자료 요청, 방문 일정 조율 모두 담당자가 직접 응대합니다.</p>
@@ -668,6 +764,7 @@ html:not(.js) .tl::after{transform:none}
   <p>상호 퍼스트유팜<span class="sep">|</span>대표 이희광<span class="sep">|</span>사업자등록번호 488-08-01700</p>
   <p>의약품 판촉영업자 신고 2024.10.19 (대구광역시 동구보건소)</p>
   <p>대구광역시 동구 동부로30길 102-3, 1311호(신천동, 올인워크)<span class="sep">|</span>Tel 070-7677-1777<span class="sep">|</span>contact@firstyoupharm.com</p>
+  <nav class="footer-social" aria-label="퍼스트유팜 공식 SNS"><span class="footer-social-title">공식 채널</span><a class="footer-social-link" href="https://blog.naver.com/firstyoupharm" target="_blank" rel="noopener noreferrer" aria-label="퍼스트유팜 네이버 블로그, 새 탭"><svg aria-hidden="true" viewbox="0 0 32 32"><rect fill="#03C75A" height="32" rx="8" width="32"></rect><path d="M7 9.5h18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7.2L15 24.8 13.4 21.5H7a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z" fill="#fff"></path><text fill="#03C75A" font-family="Arial,Helvetica,sans-serif" font-size="7.6" font-weight="700" text-anchor="middle" x="16" y="18.7">blog</text></svg><span>네이버 블로그</span></a><a class="footer-social-link" href="https://www.instagram.com/firstyoupharm/" target="_blank" rel="noopener noreferrer" aria-label="퍼스트유팜 인스타그램, 새 탭"><svg aria-hidden="true" viewbox="0 0 32 32"><defs><radialgradient cx="30%" cy="107%" id="ig" r="150%"><stop offset="0" stop-color="#fdf497"></stop><stop offset=".05" stop-color="#fdf497"></stop><stop offset=".45" stop-color="#fd5949"></stop><stop offset=".6" stop-color="#d6249f"></stop><stop offset=".9" stop-color="#285AEB"></stop></radialgradient></defs><rect fill="url(#ig)" height="32" rx="8" width="32"></rect><rect fill="none" height="16" rx="4.6" stroke="#fff" stroke-width="2" width="16" x="8" y="8"></rect><circle cx="16" cy="16" fill="none" r="3.8" stroke="#fff" stroke-width="2"></circle><circle cx="20.6" cy="11.4" fill="#fff" r="1.15"></circle></svg><span>인스타그램</span></a></nav>
   <div class="fbottom"><span>© <span id="yr">2026</span> FIRST YOU PHARM. All rights reserved.</span><span class="slogan">First You, First Mind</span></div>
  </div>
 </footer>
@@ -704,17 +801,26 @@ const items=$$('#plist li'),pnow=$('#pnow');
 const pio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){items.forEach(i=>i.classList.remove('active'));e.target.classList.add('active');pnow.textContent=String(items.indexOf(e.target)+1).padStart(2,'0')}})},{rootMargin:'-45% 0px -45% 0px'});
 items.forEach(i=>pio.observe(i));items[0].classList.add('active');
 /* nav current */
-const links=$$('.nav a[data-n]'),secs=$$('main section[id]');
+const links=$$('.nav a[data-n],.chapter-nav a[data-n],.mnav a[data-n]'),secs=$$('main section[id]');
 /* scroll-linked: progress, header hide, timeline line, parallax */
-const tl=$('#tl'),ceo=$('#ceo');let lastY=scrollY,ticking=false;
+const tl=$('#tl'),ceo=$('#ceo'),chapterNav=$('#chapter-nav');let ticking=false,lastChapter='';
 const onScroll=()=>{const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
  pg.style.transform=`scaleX(${h>0?y/h:0})`;
  hd.classList.toggle('scrolled',y>20);
- if(!mn.classList.contains('open'))hd.classList.toggle('hide',y>lastY&&y>400);lastY=y;
+ // 메뉴는 원스크롤 페이지의 상시 길잡이이므로 스크롤 방향과 무관하게 고정 표시합니다.
  const r=tl.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.6-r.top)/r.height));tl.style.setProperty('--p',p.toFixed(3));
  if(!R&&innerWidth>1080){const c=ceo.parentElement.getBoundingClientRect();const k=(c.top+c.height/2-innerHeight/2)/innerHeight;const v=Math.max(-9,Math.min(0,-4.5-k*4.5));ceo.style.transform=`translateY(${v.toFixed(2)}%)`}
- let cur='';for(const s of secs){if(s.getBoundingClientRect().top<=140)cur=s.id}
+ let cur='';const threshold=innerWidth<=1080?168:145;
+ for(const s of secs){if(s.getBoundingClientRect().top<=threshold)cur=s.id}
  links.forEach(l=>{const on=l.dataset.n===cur;l.classList.toggle('on',on);on?l.setAttribute('aria-current','location'):l.removeAttribute('aria-current')});
+ if(chapterNav && cur && lastChapter!==cur){
+  lastChapter=cur;
+  const active=chapterNav.querySelector(`[data-n="${cur}"]`);
+  if(active && chapterNav.clientWidth>0){
+   const a=active.getBoundingClientRect(),n=chapterNav.getBoundingClientRect();
+   chapterNav.scrollBy({left:a.left-n.left+(a.width-n.width)/2,behavior:R?'auto':'smooth'});
+  }
+ }
  ticking=false};
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
 addEventListener('resize',()=>{if(innerWidth>1080)close();onScroll()});onScroll();
